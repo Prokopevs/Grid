@@ -1,0 +1,273 @@
+ /* Первый пример */
+
+body {
+    margin: 0;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+.wrapper1 {
+    display: grid;
+    gap: 10px; /*отступы между элементами */
+    background-color: aqua;
+    margin-top: 40px;
+}
+
+.center {
+    text-align: center;
+}
+
+.wrapper1 > div {
+    background-color: gray;
+    min-width: 100px;
+    min-height: 100px;
+    border: 1px solid #000;
+}
+
+.item1 {
+    grid-column: 1 / 2;
+}
+
+.item2 {
+    grid-column: 2 / 3;
+}
+
+.item3 {
+    grid-column: 3 / 4;
+}
+
+.item4 {
+    grid-column: 4 / 5;
+}
+
+.item5 {
+    grid-column: 2 / 3; /* колонки */
+    grid-row: 1 / 3; /* строки */
+}
+
+.item6 {
+    grid-column: 1 / 2;
+    /* grid-row: 1 / 2; */
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.item6 {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+
+
+/* Второй пример */
+.wrapper2 {
+    display: grid;
+    gap: 10px;
+}
+
+.wrapper2 > * {
+    border-radius: 10px;
+}
+
+.header2 {
+    background-color: orange;
+}
+
+.article2 {
+    background-color: blueviolet;
+}
+
+.aside2 {
+    background-color: cadetblue;
+}
+
+@media (min-width: 767px) {
+    .header2 {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+    }
+    .article2 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+    .aside2 {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+}
+
+@media (min-width: 900px) {
+    .header2 {
+        grid-column: 1 / 3;
+        grid-row: 1 / 2;
+    }
+    .article2 {
+        grid-column: 2 / 3;
+        grid-row: 2 / 3;
+    }
+    .aside2 {
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
+    }
+}
+
+
+
+/* Третий пример */
+
+.wrapper3 {
+    display: grid;
+    gap: 10px 20px; /* тоже самое что и марджин */
+
+    /* grid-template-columns: 300px 300px 300px; */
+    /* grid-template-columns: repeat(3, 300px); то же самое что 3 по 300 */
+    /* grid-template-columns: 1fr 3fr 1fr; */
+    grid-template-columns: repeat(3, 1fr);
+
+    /* grid-template-rows: 300px 80px; */
+    grid-template-rows: repeat(3, auto);
+}
+
+.wrapper3 > * {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: gold;
+}
+
+.item:nth-child(3) {
+    order: 1; /* 3 элемент станет последним. Если ходим переместить его в самое начало то пишем -1 */
+
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+}
+
+
+
+/* Четвёрты пример */
+
+.container {
+    display: grid;
+    gap: 10px 20px;
+    
+    /* grid-template-columns: repeat(4, 1fr); */
+    grid-template-columns: 1fr 1fr 50px 1fr;
+    grid-template-areas: 
+        "header     header     header    header"
+        "article    article    .         sidebar" 
+        "footer     footer     footer   footer";
+
+    /* grid-template:  
+    "header     header     header    header" 50px
+    "article    article    .         sidebar" auto 
+    "footer     footer     footer   footer" 50px / 1fr 1fr 50px 1fr; */
+}
+
+.container > * {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.header__inner {
+    grid-area: header;
+    background-color: bisque;
+}
+
+.article__inner {
+    grid-area: article;
+    background-color: rgb(49, 143, 143);
+}
+
+.aside__inner {
+    grid-area: sidebar;
+    background-color: dodgerblue;
+}
+
+.footer__inner {
+    grid-area: footer;
+    background-color: crimson;
+}
+
+
+/* Пятый пример */
+
+.container2 {
+    display: grid;
+    gap: 10px 20px;
+
+    grid-template: 400px 300px / 1fr 1fr 1fr;
+    /* justify-items: center; /* start | end | center | stretch 
+    align-items: center; */
+
+    place-items: start center; /* align-items justify-items */
+}
+
+.container2 > * {
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.header__inner2 {
+    background-color: rgb(21, 190, 69);
+}
+
+.article__inner2 {
+    background-color: rgb(249, 90, 90);
+}
+
+.aside__inner2 {
+    background-color: rgb(217, 255, 0);
+}
+
+.footer__inner2 {
+    background-color: rgb(0, 251, 255);
+}
+
+
+
+/* Шестой пример */
+
+.container3 {
+    display: grid;
+    gap: 10px 20px;
+    padding: 15px;
+
+    grid-template-columns: 200px 1fr minmax(100px, 500px); 
+    /* grid-template-rows: 100px 200px; */
+    grid-auto-rows: minmax(100px, auto); /* для элементов у которыч не указана высота явно т.е выше написанно для первой стороки 100px для 2 строки 200px а дальше нет. Поэтому 3 строка будет минимум 100px а максимум auto */ 
+}
+
+.ite2 {
+    background-color: rgb(80, 109, 251);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+
+
+/* Седьмой пример */
+
+.container4 {
+    display: grid;
+    gap: 10px 20px;
+
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); 
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); 
+}
+
+.ite3 {
+    background-color: rgb(148, 231, 39);
+    border-radius: 15px;
+    padding: 10px;
+}
+
+
+
+
+
+
+
+
